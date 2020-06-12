@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button"
 import IconButton from "@material-ui/core/IconButton"
 import MenuIcon from "@material-ui/icons/Alarm"
 import AddIcon from "@material-ui/icons/Add"
+import DeleteIcon from "@material-ui/icons/Delete"
 import { TodoTable } from "./components"
 import { CardHeader, TextField, FormControl, InputLabel, Input, OutlinedInput } from "@material-ui/core"
 
@@ -63,6 +64,10 @@ const useStyles = makeStyles((theme: Theme) => ({
         paddingLeft: theme.spacing(2),
         paddingRight: theme.spacing(2),
     },
+    deleteWrapper: {
+        display: "flex",
+        justifyContent: "flex-end",
+    },
 }))
 
 export interface TodoProps {}
@@ -109,8 +114,10 @@ const Todo: React.SFC<TodoProps> = (props) => {
                         <CardContent>
                             <TodoTable></TodoTable>
                         </CardContent>
-                        <CardActions>
-                            <Button size='small'>Delete</Button>
+                        <CardActions className={classes.deleteWrapper}>
+                            <Button variant='contained' color='secondary' startIcon={<DeleteIcon />}>
+                                Delete
+                            </Button>
                         </CardActions>
                     </Card>
                 </Container>

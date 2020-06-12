@@ -6,10 +6,9 @@ import TableCell from "@material-ui/core/TableCell"
 import TableContainer from "@material-ui/core/TableContainer"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
-import Paper from "@material-ui/core/Paper"
 import CloseIcon from "@material-ui/icons/Close"
 import EditIcon from "@material-ui/icons/Edit"
-import { Checkbox, IconButton, Typography, Button } from "@material-ui/core"
+import { Checkbox, IconButton, Typography } from "@material-ui/core"
 
 const useStyles = makeStyles({
     table: {
