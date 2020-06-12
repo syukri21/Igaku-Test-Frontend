@@ -10,10 +10,14 @@ import Toolbar from "@material-ui/core/Toolbar"
 import Button from "@material-ui/core/Button"
 import IconButton from "@material-ui/core/IconButton"
 import MenuIcon from "@material-ui/icons/Alarm"
+import AddIcon from "@material-ui/icons/Add"
+import { TodoTable } from "./components"
+import { CardHeader, TextField, FormControl, InputLabel, Input, OutlinedInput } from "@material-ui/core"
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
         minWidth: 275,
+        padding: theme.spacing(1),
     },
     bullet: {
         display: "inline-block",
@@ -49,7 +53,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     containerTodo: {
         position: "relative",
         zIndex: 1,
-        paddingTop: theme.spacing(4),
+        paddingTop: theme.spacing(2),
+    },
+    cardHeader: {
+        display: "flex",
+        alignItems: "center",
+    },
+    fieldTodo: {
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2),
     },
 }))
 
@@ -57,7 +69,6 @@ export interface TodoProps {}
 
 const Todo: React.SFC<TodoProps> = (props) => {
     const classes = useStyles()
-    const bull = <span className={classes.bullet}>•</span>
     return (
         <>
             <div className={classes.appbar}>
@@ -76,7 +87,28 @@ const Todo: React.SFC<TodoProps> = (props) => {
             <div className={classes.todoWrap}>
                 <Container maxWidth='md' className={classes.containerTodo}>
                     <Card className={classes.root}>
-                        <CardContent></CardContent>
+                        <CardHeader title='To do List   ' className={classes.cardHeader} />
+                        <CardActions className={classes.fieldTodo}>
+                            <FormControl fullWidth variant='outlined'>
+                                <InputLabel htmlFor='todo-input'>What needs to be done?</InputLabel>
+                                <OutlinedInput
+                                    id='todo-input'
+                                    aria-describedby='standard-weight-helper-text'
+                                    inputProps={{
+                                        "aria-label": "weight",
+                                    }}
+                                    endAdornment={
+                                        <Button>
+                                            <AddIcon></AddIcon>
+                                        </Button>
+                                    }
+                                    labelWidth={175}
+                                ></OutlinedInput>
+                            </FormControl>
+                        </CardActions>
+                        <CardContent>
+                            <TodoTable></TodoTable>
+                        </CardContent>
                         <CardActions>
                             <Button size='small'>Learn More</Button>
                         </CardActions>

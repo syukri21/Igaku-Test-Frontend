@@ -30,7 +30,7 @@ export default function TodoTable() {
     const classes = useStyles()
 
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={"div"}>
             <Table className={classes.table} aria-label='simple table'>
                 <TableHead>
                     <TableRow>
