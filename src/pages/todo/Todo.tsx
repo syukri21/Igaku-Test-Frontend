@@ -110,7 +110,7 @@ const Todo: React.SFC<TodoProps> = (props) => {
                             <TodoTable></TodoTable>
                         </CardContent>
                         <CardActions>
-                            <Button size='small'>Learn More</Button>
+                            <Button size='small'>Delete</Button>
                         </CardActions>
                     </Card>
                 </Container>

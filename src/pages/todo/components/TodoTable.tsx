@@ -7,6 +7,9 @@ import TableContainer from "@material-ui/core/TableContainer"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import Paper from "@material-ui/core/Paper"
+import CloseIcon from "@material-ui/icons/Close"
+import EditIcon from "@material-ui/icons/Edit"
+import { Checkbox, IconButton, Typography, Button } from "@material-ui/core"
 
 const useStyles = makeStyles({
     table: {
@@ -31,26 +34,41 @@ export default function TodoTable() {
 
     return (
         <TableContainer component={"div"}>
-            <Table className={classes.table} aria-label='simple table'>
+            <Table className={classes.table} aria-label='simple table' size='small'>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align='right'>Calories</TableCell>
-                        <TableCell align='right'>Fat&nbsp;(g)</TableCell>
-                        <TableCell align='right'>Carbs&nbsp;(g)</TableCell>
-                        <TableCell align='right'>Protein&nbsp;(g)</TableCell>
+                        <TableCell size='small'></TableCell>
+
+                        <TableCell>Task Name</TableCell>
+                        <TableCell align='right' size='small'>
+                            Status
+                        </TableCell>
+                        <TableCell size='small'></TableCell>
+                        <TableCell size='small'></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {rows.map((row) => (
                         <TableRow key={row.name}>
+                            <TableCell padding='checkbox' size='small'>
+                                <Checkbox color='primary'></Checkbox>
+                            </TableCell>
                             <TableCell component='th' scope='row'>
                                 {row.name}
                             </TableCell>
-                            <TableCell align='right'>{row.calories}</TableCell>
-                            <TableCell align='right'>{row.fat}</TableCell>
-                            <TableCell align='right'>{row.carbs}</TableCell>
-                            <TableCell align='right'>{row.protein}</TableCell>
+                            <TableCell align='right' size='small'>
+                                <Typography color='primary'>active </Typography>
+                            </TableCell>
+                            <TableCell padding='checkbox' size='small'>
+                                <IconButton color='primary'>
+                                    <EditIcon></EditIcon>
+                                </IconButton>
+                            </TableCell>
+                            <TableCell padding='checkbox' size='small'>
+                                <IconButton color='secondary'>
+                                    <CloseIcon></CloseIcon>
+                                </IconButton>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
