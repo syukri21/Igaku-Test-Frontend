@@ -16,8 +16,8 @@ const TodoForm: React.SFC<TodoFormProps> = (props) => {
                     name='task'
                     type='text'
                     onChange={formik.handleChange}
-                    onKeyPress={(e) => {
-                        if (e.keyCode == 13) formik.handleSubmit
+                    onKeyPress={(event: any) => {
+                        if (event.which === 13 || event.keyCode === 13) formik.submitForm()
                     }}
                     aria-describedby='standard-weight-helper-text'
                     inputProps={{

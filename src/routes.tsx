@@ -39,7 +39,7 @@ const routes: IRoute[] = [
         Loading: null,
         exact: true,
         path: "/todo",
-        Protected: false,
+        Protected: true,
     },
     {
         Component: Login,
