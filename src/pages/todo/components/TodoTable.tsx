@@ -28,13 +28,12 @@ export default function TodoTable() {
             <Table className={classes.table} aria-label='simple table' size='small'>
                 <TableHead>
                     <TableRow>
-                        <TableCell size='small'></TableCell>
+                        <TableCell size='small' padding='checkbox'></TableCell>
                         <TableCell>Task Name</TableCell>
                         <TableCell align='right' size='small'>
                             Status
                         </TableCell>
-                        <TableCell size='small'></TableCell>
-                        <TableCell size='small'></TableCell>
+                        <TableCell size='small' padding='checkbox'></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -57,11 +56,6 @@ export default function TodoTable() {
                                 <TableCell padding='checkbox' size='small'>
                                     <IconButton color='primary'>
                                         <EditIcon></EditIcon>
-                                    </IconButton>
-                                </TableCell>
-                                <TableCell padding='checkbox' size='small'>
-                                    <IconButton color='secondary'>
-                                        <CloseIcon></CloseIcon>
                                     </IconButton>
                                 </TableCell>
                             </TableRow>

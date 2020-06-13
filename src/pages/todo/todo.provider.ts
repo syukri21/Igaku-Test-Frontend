@@ -5,7 +5,7 @@ import TodoDelete, { deleteTodo } from "./providers/todo-delete.provider"
 import TodoDeleteIds from "./providers/todo-delete-ids.provider"
 
 export default function useTodo() {
-    const [deleteIdsState] = TodoDeleteIds.useGlobal()
+    const [deleteIdsState, setDeleteIds] = TodoDeleteIds.useGlobal()
     const [todoDeleteState] = TodoDelete.useGlobal()
 
     useEffect(() => {
@@ -32,6 +32,7 @@ export default function useTodo() {
                     message: `${deleteIdsState.ids?.length} items deleted`,
                     severity: "success",
                 })
+                setDeleteIds({ ids: [] })
             })
         })
     }
