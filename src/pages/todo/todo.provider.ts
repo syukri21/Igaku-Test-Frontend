@@ -27,7 +27,12 @@ export default function useTodo() {
 
     function handleDelete() {
         deleteTodo({ ids: deleteIdsState.ids }).then(() => {
-            getTodos()
+            getTodos().then(() => {
+                setGlobalSnackbar("SHOW", {
+                    message: `${deleteIdsState.ids?.length} items deleted`,
+                    severity: "success",
+                })
+            })
         })
     }
 
