@@ -13,7 +13,7 @@ import MenuIcon from "@material-ui/icons/Alarm"
 import AddIcon from "@material-ui/icons/Add"
 import DeleteIcon from "@material-ui/icons/Delete"
 import { TodoTable } from "./components"
-import { CardHeader, TextField, FormControl, InputLabel, Input, OutlinedInput } from "@material-ui/core"
+import { CardHeader, FormControl, InputLabel, OutlinedInput } from "@material-ui/core"
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export interface TodoProps {}
 
-const Todo: React.SFC<TodoProps> = (props) => {
+const Todo: React.SFC<TodoProps> = () => {
     const classes = useStyles()
     return (
         <>
