@@ -22,7 +22,7 @@ TodoDelete.addReducer("deleteTodo", (global: any, _, type, payload) => {
     return global
 })
 
-export async function getTodos(data: TodoDeleteParam) {
+export async function deleteTodo(data: TodoDeleteParam) {
     const dispatch = TodoDelete.getDispatch()
     try {
         dispatch.deleteTodo("LOADING")

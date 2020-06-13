@@ -41,3 +41,9 @@ export interface TodoEditState {
     error: any
     data?: TodoEditResponse
 }
+
+export interface TodosGetState {
+    loading: boolean
+    error: any
+    data?: TodoType[]
+}

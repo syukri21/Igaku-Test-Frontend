@@ -1,8 +1,8 @@
 import { createProvider } from "reactn"
 import Api from "../../../api/api"
-import { TodoType } from "../@types/todo.types"
+import { TodosGetState } from "../@types/todo.types"
 
-const TodoGetAll = createProvider<TodoType[]>()
+const TodoGetAll = createProvider<TodosGetState[]>()
 
 TodoGetAll.addReducer("getTodos", (global: any, _, type, payload) => {
     switch (type) {
