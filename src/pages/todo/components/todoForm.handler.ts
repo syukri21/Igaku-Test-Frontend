@@ -3,6 +3,7 @@ import { useFormik } from "formik"
 import * as Yup from "yup"
 import { createTodo } from "../providers/todo-create.provider"
 import { getTodos } from "../providers/todo-getAll.provider"
+import { setGlobalSnackbar } from "../../../components/GlobalSnackbar/globalSnackbar.provider"
 
 const initialValues: TodoCreateParam = {
     task: "",
@@ -18,7 +19,15 @@ export default function useTodoForm() {
         initialValues,
         onSubmit: (values) => {
             createTodo(values).then(() => {
-                getTodos()
+                getTodos().then(() => {
+                    setGlobalSnackbar("SHOW", {
+                        message: `Success add 1 item`,
+                        severity: "success",
+                    })
+                    formik.resetForm({
+                        values: initialValues,
+                    })
+                })
             })
         },
     })

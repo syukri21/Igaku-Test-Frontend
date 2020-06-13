@@ -24,6 +24,7 @@ const TodoForm: React.SFC<TodoFormProps> = (props) => {
                 inputProps={{
                     "aria-label": "weight",
                 }}
+                value={formik.values.task}
                 endAdornment={
                     <Button
                         onClick={(event: any) => {

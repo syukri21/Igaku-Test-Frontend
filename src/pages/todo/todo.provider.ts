@@ -26,6 +26,12 @@ export default function useTodo() {
     }, [])
 
     function handleDelete() {
+        if (deleteIdsState.ids?.length === 0) {
+            return setGlobalSnackbar("SHOW", {
+                message: `Choose one item!`,
+                severity: "warning",
+            })
+        }
         deleteTodo({ ids: deleteIdsState.ids }).then(() => {
             getTodos().then(() => {
                 setGlobalSnackbar("SHOW", {
