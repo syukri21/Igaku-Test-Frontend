@@ -1,6 +1,6 @@
 import { createProvider } from "reactn"
 import Api from "../../../api/api"
-import { LoginState } from "../@types/login.type"
+import { LoginState, LoginParams } from "../@types/login.type"
 
 const LoginProvider = createProvider<LoginState>()
 
@@ -22,7 +22,7 @@ LoginProvider.addReducer("login", (global: any, _, type, payload) => {
     return global
 })
 
-export async function login(data) {
+export async function login(data: LoginParams) {
     const dispatch = LoginProvider.getDispatch()
     try {
         dispatch.login("LOADING")

@@ -12,5 +12,5 @@ export interface LoginResponse {
 export interface LoginState {
     loading: false
     error: any
-    data: LoginResponse
+    data?: LoginResponse
 }
