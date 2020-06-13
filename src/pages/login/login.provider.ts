@@ -4,6 +4,7 @@ import { useFormik } from "formik"
 import { LoginParams, LoginResponse } from "./@types/login.type"
 import { setGlobalSnackbar } from "../../components/GlobalSnackbar/globalSnackbar.provider"
 import { useHistory } from "react-router-dom"
+import Api from "../../api/api"
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().email().required("required*"),
@@ -19,14 +20,22 @@ export default function useLogin() {
     const [loginState] = LoginProvider.useGlobal()
     const history = useHistory()
 
+    function handleToken(data: LoginResponse) {
+        Api.setToken(data.accessToken)
+        if (Api.getToken()) {
+            history.push("/todo")
+        } else {
+            handleToken(data)
+        }
+    }
+
     const formik = useFormik({
         validationSchema,
         initialValues,
         onSubmit: (values) => {
             login(values)
                 .then((data: LoginResponse) => {
-                    if (window) window.localStorage.setItem("token", data.accessToken)
-                    history.push("/todo")
+                    handleToken(data)
                 })
                 .catch((error: any) => {
                     console.log("useLogin -> error", error)

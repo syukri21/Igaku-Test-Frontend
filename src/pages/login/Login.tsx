@@ -79,9 +79,8 @@ const Login: React.SFC<LoginProps> = (props) => {
                         error={formik.touched.email && !!formik.errors.email}
                         FormHelperTextProps={{ style: { fontSize: 10 } }}
                     />
-                    <FormControlLabel control={<Checkbox value='remember' color='primary' />} label='Remember me' />
-                    <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
-                        Sign In
+                    <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit} disabled={loginState.loading}>
+                        {loginState.loading ? "Loading..." : "Sign In"}
                     </Button>
 
                     <Box component='div' display='flex' justifyContent='flex-end'>
