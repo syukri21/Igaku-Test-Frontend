@@ -3,6 +3,7 @@ import { useFormik } from "formik"
 import * as Yup from "yup"
 import { useHistory } from "react-router-dom"
 import { setGlobalSnackbar } from "../../components/GlobalSnackbar/globalSnackbar.provider"
+import RegisterProvider from "./providers/register.provider"
 
 const initialValues = {
     firstName: "",
@@ -24,20 +25,22 @@ const validationSchema = Yup.object().shape({
 
 export default function useRegister() {
     const history = useHistory()
+    const [registerState] = RegisterProvider.useGlobal()
+
     const formik = useFormik({
         validationSchema,
         initialValues,
         onSubmit: (values) => {
-            register(values).catch((error) => {
-                console.log("useRegister -> error", error)
-                setGlobalSnackbar("SHOW", {
-                    message: "Something Went Wrong!",
-                    severity: "error",
+            register(values)
+                .then(() => history.push("/login"))
+                .catch((error) => {
+                    setGlobalSnackbar("SHOW", {
+                        message: "Something Went Wrong!",
+                        severity: "error",
+                    })
                 })
-            })
-            // .then(() => history.push("/login"))
         },
     })
 
-    return { formik }
+    return { formik, registerState }
 }

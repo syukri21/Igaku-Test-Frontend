@@ -41,7 +41,7 @@ export interface RegisterProps {}
 
 const Register: React.SFC<RegisterProps> = (props) => {
     const classes = useStyles()
-    const { formik } = useRegister()
+    const { formik, registerState } = useRegister()
     return (
         <Container component='main' maxWidth='xs'>
             <div className={classes.paper}>
@@ -130,8 +130,8 @@ const Register: React.SFC<RegisterProps> = (props) => {
                         helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
                         error={!!formik.errors.confirmPassword && formik.touched.confirmPassword}
                     />
-                    <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
-                        Sign Up
+                    <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit} disabled={registerState.loading}>
+                        {registerState.loading ? "Loading.." : "Sign Up"}
                     </Button>
                     <Box component='div' display='flex' justifyContent='flex-end'>
                         <RouterLink to='/login'>

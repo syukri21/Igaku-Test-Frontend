@@ -2,7 +2,10 @@ import { createProvider } from "reactn"
 import Api from "../../../api/api"
 import { RegisterState, RegisterParam } from "../@types/register.type"
 
-const RegisterProvider = createProvider<RegisterState>()
+const RegisterProvider = createProvider<RegisterState>({
+    loading: false,
+    error: null,
+})
 
 RegisterProvider.addReducer("register", (global: any, _, type, payload) => {
     switch (type) {
