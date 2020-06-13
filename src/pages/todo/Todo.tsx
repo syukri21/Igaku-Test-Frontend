@@ -10,10 +10,10 @@ import Toolbar from "@material-ui/core/Toolbar"
 import Button from "@material-ui/core/Button"
 import IconButton from "@material-ui/core/IconButton"
 import MenuIcon from "@material-ui/icons/Alarm"
-import AddIcon from "@material-ui/icons/Add"
 import DeleteIcon from "@material-ui/icons/Delete"
 import { TodoTable } from "./components"
-import { CardHeader, FormControl, InputLabel, OutlinedInput } from "@material-ui/core"
+import { CardHeader } from "@material-ui/core"
+import TodoForm from "./components/TodoForm"
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
@@ -94,22 +94,7 @@ const Todo: React.SFC<TodoProps> = () => {
                     <Card className={classes.root}>
                         <CardHeader title='To do List   ' className={classes.cardHeader} />
                         <CardActions className={classes.fieldTodo}>
-                            <FormControl fullWidth variant='outlined'>
-                                <InputLabel htmlFor='todo-input'>What needs to be done?</InputLabel>
-                                <OutlinedInput
-                                    id='todo-input'
-                                    aria-describedby='standard-weight-helper-text'
-                                    inputProps={{
-                                        "aria-label": "weight",
-                                    }}
-                                    endAdornment={
-                                        <Button>
-                                            <AddIcon></AddIcon>
-                                        </Button>
-                                    }
-                                    labelWidth={175}
-                                ></OutlinedInput>
-                            </FormControl>
+                            <TodoForm></TodoForm>
                         </CardActions>
                         <CardContent>
                             <TodoTable></TodoTable>

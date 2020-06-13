@@ -22,7 +22,7 @@ TodoCreate.addReducer("createTodo", (global: any, _, type, payload) => {
     return global
 })
 
-export async function getTodos(data: TodoCreateParam) {
+export async function createTodo(data: TodoCreateParam) {
     const dispatch = TodoCreate.getDispatch()
     try {
         dispatch.createTodo("LOADING")
