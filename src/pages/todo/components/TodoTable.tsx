@@ -10,6 +10,8 @@ import CloseIcon from "@material-ui/icons/Close"
 import EditIcon from "@material-ui/icons/Edit"
 import { Checkbox, IconButton, Typography } from "@material-ui/core"
 import useTodoTable from "./todoTable.handler"
+import TodoGetAll from "../providers/todo-getAll.provider"
+import { TodoType } from "../@types/todo.types"
 
 const useStyles = makeStyles({
     table: {
@@ -31,7 +33,7 @@ const rows = [
 
 export default function TodoTable() {
     const classes = useStyles()
-    const { todosState } = useTodoTable()
+    const [todosState] = TodoGetAll.useGlobal()
 
     return (
         <TableContainer component={"div"}>
@@ -48,29 +50,34 @@ export default function TodoTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.name}>
-                            <TableCell padding='checkbox' size='small'>
-                                <Checkbox color='primary'></Checkbox>
-                            </TableCell>
-                            <TableCell component='th' scope='row'>
-                                {row.name}
-                            </TableCell>
-                            <TableCell align='right' size='small'>
-                                <Typography color='primary'>active </Typography>
-                            </TableCell>
-                            <TableCell padding='checkbox' size='small'>
-                                <IconButton color='primary'>
-                                    <EditIcon></EditIcon>
-                                </IconButton>
-                            </TableCell>
-                            <TableCell padding='checkbox' size='small'>
-                                <IconButton color='secondary'>
-                                    <CloseIcon></CloseIcon>
-                                </IconButton>
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                    {todosState.data &&
+                        todosState.data.map((todo: TodoType) => (
+                            <TableRow key={todo.id}>
+                                <TableCell padding='checkbox' size='small'>
+                                    <Checkbox color='primary'></Checkbox>
+                                </TableCell>
+                                <TableCell component='th' scope='row'>
+                                    {todo.task}
+                                </TableCell>
+                                <TableCell align='right' size='small'>
+                                    {todo.status ? (
+                                        <Typography color='primary'>active</Typography>
+                                    ) : (
+                                        <Typography color='secondary'>completed</Typography>
+                                    )}
+                                </TableCell>
+                                <TableCell padding='checkbox' size='small'>
+                                    <IconButton color='primary'>
+                                        <EditIcon></EditIcon>
+                                    </IconButton>
+                                </TableCell>
+                                <TableCell padding='checkbox' size='small'>
+                                    <IconButton color='secondary'>
+                                        <CloseIcon></CloseIcon>
+                                    </IconButton>
+                                </TableCell>
+                            </TableRow>
+                        ))}
                 </TableBody>
             </Table>
         </TableContainer>

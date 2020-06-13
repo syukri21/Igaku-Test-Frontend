@@ -4,10 +4,7 @@ import { setGlobalSnackbar } from "../../../components/GlobalSnackbar/globalSnac
 
 export default function useTodoTable() {
     const [todosState] = TodoGetAll.useGlobal()
-
-    useEffect(() => {
-        console.log("useTodoTable -> todosState", todosState)
-    }, [todosState])
+    console.log("useTodoTable -> todosState", todosState)
 
     return { todosState }
 }

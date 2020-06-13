@@ -17,6 +17,7 @@ import TodoForm from "./components/TodoForm"
 import Api from "../../api/api"
 import { useHistory } from "react-router-dom"
 import useTodo from "./todo.provider"
+import TodoGetAllProvider from "./providers/todo-getAll.provider"
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
@@ -110,7 +111,9 @@ const Todo: React.SFC<TodoProps> = () => {
                             <TodoForm></TodoForm>
                         </CardActions>
                         <CardContent>
-                            <TodoTable></TodoTable>
+                            <TodoGetAllProvider>
+                                <TodoTable></TodoTable>
+                            </TodoGetAllProvider>
                         </CardContent>
                         <CardActions className={classes.deleteWrapper}>
                             <Button variant='contained' color='secondary' startIcon={<DeleteIcon />}>
