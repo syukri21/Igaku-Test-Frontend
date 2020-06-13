@@ -5,6 +5,7 @@ import { createBrowserHistory } from "history"
 import { IRoute } from "./routes"
 import routes from "./routes"
 import { Route, Redirect } from "react-router-dom"
+import GlobalSnackbar from "./components/GlobalSnackbar/GlobalSnackbar"
 
 const browserHistory = createBrowserHistory()
 
@@ -35,6 +36,7 @@ function App() {
                     })}
                 </Switch>
             </Router>
+            <GlobalSnackbar></GlobalSnackbar>
         </>
     )
 }
