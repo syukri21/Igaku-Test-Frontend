@@ -1,5 +1,5 @@
-import React, { useEffect } from "react"
-import TodoGetAll, { getTodos } from "./providers/todo-getAll.provider"
+import { useEffect } from "react"
+import { getTodos } from "./providers/todo-getAll.provider"
 import { setGlobalSnackbar } from "../../components/GlobalSnackbar/globalSnackbar.provider"
 
 export default function useTodo() {
@@ -9,7 +9,7 @@ export default function useTodo() {
                 .then((data) => {
                     console.log("useTodo -> data", data)
                 })
-                .catch((error) => {
+                .catch(() => {
                     setGlobalSnackbar("SHOW", {
                         message: "Token Expired!",
                         severity: "error",

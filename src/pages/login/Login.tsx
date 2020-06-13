@@ -2,10 +2,8 @@ import React from "react"
 import Avatar from "@material-ui/core/Avatar"
 import Button from "@material-ui/core/Button"
 import TextField from "@material-ui/core/TextField"
-import FormControlLabel from "@material-ui/core/FormControlLabel"
-import Checkbox from "@material-ui/core/Checkbox"
 import Link from "@material-ui/core/Link"
-import { Link as RouterLink, useHistory } from "react-router-dom"
+import { Link as RouterLink } from "react-router-dom"
 import Box from "@material-ui/core/Box"
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import Typography from "@material-ui/core/Typography"
@@ -35,9 +33,9 @@ const useStyles = makeStyles((theme) => ({
 
 export interface LoginProps {}
 
-const Login: React.SFC<LoginProps> = (props) => {
+const Login: React.SFC<LoginProps> = () => {
     const classes = useStyles()
-    const { history, loginState, formik } = useLogin()
+    const { loginState, formik } = useLogin()
 
     return (
         <Container component='main' maxWidth='xs'>
