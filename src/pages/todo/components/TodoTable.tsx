@@ -11,6 +11,7 @@ import EditIcon from "@material-ui/icons/Edit"
 import { Checkbox, IconButton, Typography } from "@material-ui/core"
 import TodoGetAll from "../providers/todo-getAll.provider"
 import { TodoType } from "../@types/todo.types"
+import useTodoTable from "./todoTable.handler"
 
 const useStyles = makeStyles({
     table: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
 
 export default function TodoTable() {
     const classes = useStyles()
-    const [todosState] = TodoGetAll.useGlobal()
+    const { todosState, handleChangeCheck } = useTodoTable()
 
     return (
         <TableContainer component={"div"}>
@@ -41,7 +42,7 @@ export default function TodoTable() {
                         todosState.data.map((todo: TodoType) => (
                             <TableRow key={todo.id}>
                                 <TableCell padding='checkbox' size='small'>
-                                    <Checkbox color='primary'></Checkbox>
+                                    <Checkbox color='primary' onChange={handleChangeCheck(todo.id)}></Checkbox>
                                 </TableCell>
                                 <TableCell component='th' scope='row'>
                                     {todo.task}

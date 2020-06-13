@@ -18,7 +18,7 @@ export interface TodoCreateResponse {
 export interface TodoCreateState {
     loading: boolean
     error: any
-    data?: TodoCreateResponse
+    data: TodoCreateResponse
 }
 
 export interface TodoDeleteParam {

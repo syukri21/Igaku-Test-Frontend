@@ -2,7 +2,11 @@ import { createProvider } from "reactn"
 import Api from "../../../api/api"
 import { TodoCreateState, TodoDeleteParam } from "../@types/todo.types"
 
-const TodoDelete = createProvider<TodoCreateState>()
+const TodoDelete = createProvider<TodoCreateState>({
+    loading: false,
+    error: null,
+    data: { message: "" },
+})
 
 TodoDelete.addReducer("deleteTodo", (global: any, _, type, payload) => {
     switch (type) {
