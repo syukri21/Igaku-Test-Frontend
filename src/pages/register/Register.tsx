@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import Container from "@material-ui/core/Container"
 import { Link as RouterLink } from "react-router-dom"
+import useRegister from "./register.handler"
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -40,6 +41,7 @@ export interface RegisterProps {}
 
 const Register: React.SFC<RegisterProps> = (props) => {
     const classes = useStyles()
+    const { formik } = useRegister()
     return (
         <Container component='main' maxWidth='xs'>
             <div className={classes.paper}>
@@ -49,7 +51,7 @@ const Register: React.SFC<RegisterProps> = (props) => {
                 <Typography component='h1' variant='h5'>
                     Sign up
                 </Typography>
-                <form className={classes.form} noValidate autoComplete='none'>
+                <form className={classes.form} noValidate autoComplete='none' onSubmit={formik.handleSubmit}>
                     <div className={classes.textName}>
                         <TextField
                             variant='outlined'
@@ -59,8 +61,12 @@ const Register: React.SFC<RegisterProps> = (props) => {
                             id='firstName'
                             label='First Name'
                             name='firstName'
+                            onChange={formik.handleChange}
                             autoComplete='none'
                             autoFocus
+                            FormHelperTextProps={{ style: { fontSize: 10 } }}
+                            helperText={formik.touched.firstName && formik.errors.firstName}
+                            error={!!formik.errors.firstName && formik.touched.firstName}
                         />
                         <div className={classes.spacer}></div>
                         <TextField
@@ -68,11 +74,15 @@ const Register: React.SFC<RegisterProps> = (props) => {
                             margin='normal'
                             required
                             fullWidth
-                            id='lastname'
+                            id='lastName'
                             label='Last Name'
-                            name='lastname'
+                            onChange={formik.handleChange}
+                            name='lastName'
                             autoComplete='none'
                             autoFocus
+                            FormHelperTextProps={{ style: { fontSize: 10 } }}
+                            helperText={formik.touched.lastName && formik.errors.lastName}
+                            error={!!formik.errors.lastName && formik.touched.lastName}
                         />
                     </div>
                     <TextField
@@ -81,10 +91,14 @@ const Register: React.SFC<RegisterProps> = (props) => {
                         required
                         fullWidth
                         id='email'
+                        onChange={formik.handleChange}
                         label='Email Address'
                         name='email'
                         autoComplete='none'
+                        FormHelperTextProps={{ style: { fontSize: 10 } }}
                         autoFocus
+                        helperText={formik.touched.email && formik.errors.email}
+                        error={!!formik.errors.email && formik.touched.email}
                     />
                     <TextField
                         variant='outlined'
@@ -93,9 +107,13 @@ const Register: React.SFC<RegisterProps> = (props) => {
                         fullWidth
                         name='password'
                         label='Password'
+                        onChange={formik.handleChange}
                         type='password'
                         id='password'
+                        FormHelperTextProps={{ style: { fontSize: 10 } }}
                         autoComplete='none'
+                        helperText={formik.touched.password && formik.errors.password}
+                        error={!!formik.errors.password && formik.touched.password}
                     />
                     <TextField
                         variant='outlined'
@@ -104,9 +122,13 @@ const Register: React.SFC<RegisterProps> = (props) => {
                         fullWidth
                         name='confirmPassword'
                         label='Confirm Password'
-                        type='confirmPassword'
+                        type='password'
+                        onChange={formik.handleChange}
                         id='confirmPassword'
                         autoComplete='none'
+                        FormHelperTextProps={{ style: { fontSize: 10 } }}
+                        helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+                        error={!!formik.errors.confirmPassword && formik.touched.confirmPassword}
                     />
                     <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
                         Sign Up

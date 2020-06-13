@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios"
 
 class Api {
     private static instance: Api
-    private apiUrl: string | undefined = process.env.REACT_APP_API_URL
+    private apiUrl: string | undefined = process.env.REACT_APP_API_URI
     private token?: string | null
 
     private constructor() {}
