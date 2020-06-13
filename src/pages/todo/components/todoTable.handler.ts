@@ -1,12 +1,13 @@
-import { useEffect } from "react"
 import TodoGetAll, { getTodos } from "../providers/todo-getAll.provider"
+import { useEffect } from "react"
+import { setGlobalSnackbar } from "../../../components/GlobalSnackbar/globalSnackbar.provider"
 
 export default function useTodoTable() {
-    const [todos] = TodoGetAll.useGlobal()
+    const [todosState] = TodoGetAll.useGlobal()
 
     useEffect(() => {
-        getTodos()
-    }, [])
+        console.log("useTodoTable -> todosState", todosState)
+    }, [todosState])
 
-    return { data: todos }
+    return { todosState }
 }

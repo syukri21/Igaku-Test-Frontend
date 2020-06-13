@@ -16,6 +16,7 @@ import { CardHeader } from "@material-ui/core"
 import TodoForm from "./components/TodoForm"
 import Api from "../../api/api"
 import { useHistory } from "react-router-dom"
+import useTodo from "./todo.provider"
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
@@ -77,6 +78,7 @@ export interface TodoProps {}
 const Todo: React.SFC<TodoProps> = () => {
     const classes = useStyles()
     const history = useHistory()
+    useTodo()
     return (
         <>
             <div className={classes.appbar}>

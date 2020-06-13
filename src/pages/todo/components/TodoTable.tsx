@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow"
 import CloseIcon from "@material-ui/icons/Close"
 import EditIcon from "@material-ui/icons/Edit"
 import { Checkbox, IconButton, Typography } from "@material-ui/core"
+import useTodoTable from "./todoTable.handler"
 
 const useStyles = makeStyles({
     table: {
@@ -30,6 +31,7 @@ const rows = [
 
 export default function TodoTable() {
     const classes = useStyles()
+    const { todosState } = useTodoTable()
 
     return (
         <TableContainer component={"div"}>
@@ -37,7 +39,6 @@ export default function TodoTable() {
                 <TableHead>
                     <TableRow>
                         <TableCell size='small'></TableCell>
-
                         <TableCell>Task Name</TableCell>
                         <TableCell align='right' size='small'>
                             Status
