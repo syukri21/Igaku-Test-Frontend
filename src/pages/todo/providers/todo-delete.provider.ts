@@ -1,8 +1,8 @@
 import { createProvider } from "reactn"
 import Api from "../../../api/api"
-import { TodoType } from "../@types/todo.types"
+import { TodoCreateState, TodoDeleteParam } from "../@types/todo.types"
 
-const TodoDelete = createProvider<TodoType[]>()
+const TodoDelete = createProvider<TodoCreateState>()
 
 TodoDelete.addReducer("deleteTodo", (global: any, _, type, payload) => {
     switch (type) {
@@ -22,13 +22,14 @@ TodoDelete.addReducer("deleteTodo", (global: any, _, type, payload) => {
     return global
 })
 
-export async function getTodos() {
+export async function getTodos(data: TodoDeleteParam) {
     const dispatch = TodoDelete.getDispatch()
     try {
         dispatch.deleteTodo("LOADING")
         const result = await Api.fetch({
             method: "DELETE",
             url: "/todos",
+            data,
         })
         dispatch.deleteTodo("SUCCESS", result.data)
         return result.data

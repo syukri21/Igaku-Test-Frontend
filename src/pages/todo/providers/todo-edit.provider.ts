@@ -1,8 +1,8 @@
 import { createProvider } from "reactn"
 import Api from "../../../api/api"
-import { TodoType } from "../@types/todo.types"
+import { TodoType, TodoEditState, TodoEditParam } from "../@types/todo.types"
 
-const TodoEdit = createProvider<TodoType[]>()
+const TodoEdit = createProvider<TodoEditState>()
 
 TodoEdit.addReducer("editTodo", (global: any, _, type, payload) => {
     switch (type) {
@@ -22,7 +22,7 @@ TodoEdit.addReducer("editTodo", (global: any, _, type, payload) => {
     return global
 })
 
-export async function getTodos(data) {
+export async function getTodos(data: TodoEditParam) {
     const dispatch = TodoEdit.getDispatch()
     try {
         dispatch.editTodo("LOADING")
