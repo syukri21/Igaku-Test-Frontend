@@ -11,6 +11,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import Container from "@material-ui/core/Container"
+import useLogin from "./login.provider"
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -36,7 +37,7 @@ export interface LoginProps {}
 
 const Login: React.SFC<LoginProps> = (props) => {
     const classes = useStyles()
-    const history = useHistory()
+    const { history, loginState, formik } = useLogin()
 
     return (
         <Container component='main' maxWidth='xs'>
@@ -47,7 +48,7 @@ const Login: React.SFC<LoginProps> = (props) => {
                 <Typography component='h1' variant='h5'>
                     Sign in
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
                     <TextField
                         variant='outlined'
                         margin='normal'
@@ -58,6 +59,10 @@ const Login: React.SFC<LoginProps> = (props) => {
                         name='email'
                         autoComplete='email'
                         autoFocus
+                        onChange={formik.handleChange}
+                        error={!!formik.errors.email && formik.touched.email}
+                        helperText={formik.touched.email && formik.errors.email}
+                        FormHelperTextProps={{ style: { fontSize: 10 } }}
                     />
                     <TextField
                         variant='outlined'
@@ -69,16 +74,13 @@ const Login: React.SFC<LoginProps> = (props) => {
                         type='password'
                         id='password'
                         autoComplete='current-password'
+                        onChange={formik.handleChange}
+                        helperText={formik.touched.email && formik.errors.email}
+                        error={formik.touched.email && !!formik.errors.email}
+                        FormHelperTextProps={{ style: { fontSize: 10 } }}
                     />
                     <FormControlLabel control={<Checkbox value='remember' color='primary' />} label='Remember me' />
-                    <Button
-                        type='submit'
-                        fullWidth
-                        variant='contained'
-                        color='primary'
-                        onClick={() => history.push("/todo")}
-                        className={classes.submit}
-                    >
+                    <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
                         Sign In
                     </Button>
 

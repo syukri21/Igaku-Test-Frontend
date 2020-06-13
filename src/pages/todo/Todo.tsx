@@ -14,6 +14,8 @@ import DeleteIcon from "@material-ui/icons/Delete"
 import { TodoTable } from "./components"
 import { CardHeader } from "@material-ui/core"
 import TodoForm from "./components/TodoForm"
+import Api from "../../api/api"
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
@@ -74,6 +76,7 @@ export interface TodoProps {}
 
 const Todo: React.SFC<TodoProps> = () => {
     const classes = useStyles()
+    const history = useHistory()
     return (
         <>
             <div className={classes.appbar}>
@@ -85,7 +88,15 @@ const Todo: React.SFC<TodoProps> = () => {
                         <Typography variant='h6' className={classes.appbarTitle}>
                             Todos App
                         </Typography>
-                        <Button color='inherit'>Login</Button>
+                        <Button
+                            color='inherit'
+                            onClick={(e: any) => {
+                                window.localStorage.removeItem("token")
+                                history.push("/login")
+                            }}
+                        >
+                            Log out
+                        </Button>
                     </Toolbar>
                 </AppBar>
             </div>

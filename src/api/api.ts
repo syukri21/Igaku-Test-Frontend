@@ -34,7 +34,7 @@ class Api {
         }
         const token = localStorage.getItem("token")
         if (token) {
-            axiosRequestConfig.headers = { Authorization: token }
+            axiosRequestConfig.headers = { Authorization: `Bearer ${token}` }
         }
         return axios.create(axiosRequestConfig)(params)
     }

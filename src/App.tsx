@@ -6,6 +6,7 @@ import { IRoute } from "./routes"
 import routes from "./routes"
 import { Route, Redirect } from "react-router-dom"
 import GlobalSnackbar from "./components/GlobalSnackbar/GlobalSnackbar"
+import Api from "./api/api"
 
 const browserHistory = createBrowserHistory()
 
@@ -20,11 +21,13 @@ function App() {
                         const Loading = route.Loading
                         const protect = route.Protected
                         const path = route.path
+                        const hasToken = !!Api.getToken()
                         return (
                             <Route
+                                key={key}
                                 path={path}
                                 render={(matchProps) => {
-                                    if (protect) return <Redirect to='/login'></Redirect>
+                                    if (protect && !hasToken) return <Redirect to='/login'></Redirect>
                                     return (
                                         <React.Suspense fallback={Loading}>
                                             <Component {...matchProps} />
