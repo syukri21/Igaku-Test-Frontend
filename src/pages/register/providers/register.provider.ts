@@ -1,7 +1,8 @@
 import { createProvider } from "reactn"
 import Api from "../../../api/api"
+import { RegisterState, RegisterParam } from "../@types/register.type"
 
-const RegisterProvider = createProvider()
+const RegisterProvider = createProvider<RegisterState>()
 
 RegisterProvider.addReducer("register", (global: any, _, type, payload) => {
     switch (type) {
@@ -21,7 +22,7 @@ RegisterProvider.addReducer("register", (global: any, _, type, payload) => {
     return global
 })
 
-export async function register(data) {
+export async function register(data: RegisterParam) {
     const dispatch = RegisterProvider.getDispatch()
     try {
         dispatch.register("LOADING")
