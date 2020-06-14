@@ -78,7 +78,7 @@ const Login: React.SFC<LoginProps> = () => {
                         FormHelperTextProps={{ style: { fontSize: 10 } }}
                     />
                     <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit} disabled={loginState.loading}>
-                        {loginState.data?.accessToken ? "Loading..." : "Sign In"}
+                        {!!loginState.data?.accessToken || loginState.loading ? "Loading..." : "Sign In"}
                     </Button>
 
                     <Box component='div' display='flex' justifyContent='flex-end'>
