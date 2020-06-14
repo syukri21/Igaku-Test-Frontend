@@ -13,15 +13,16 @@ export default function useTodo() {
     useEffect(() => {
         getTodos()
             .then((data) => {
-                getUser()
+                getUser().catch(() => {
+                    window.localStorage.clear()
+                    window.location.reload()
+                })
             })
             .catch(() => {
                 setGlobalSnackbar("SHOW", {
                     message: "Token Expired!",
                     severity: "error",
                 })
-                window.localStorage.clear()
-                window.location.reload()
             })
     }, [])
 
