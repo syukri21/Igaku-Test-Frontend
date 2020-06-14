@@ -26,6 +26,7 @@ export default function useLogin() {
         onSubmit: (values) => {
             login(values)
                 .then((data: LoginResponse) => {
+                    Api.setToken(data.accessToken)
                     history.push("/todo")
                 })
                 .catch((error: any) => {
