@@ -22,9 +22,7 @@ export default function useLogin() {
 
     function handleToken(data: LoginResponse) {
         Api.setToken(data.accessToken)
-        setTimeout(() => {
-            history.push("/todo")
-        }, 1000)
+        setTimeout(() => {}, 1000)
     }
 
     const formik = useFormik({
@@ -33,7 +31,7 @@ export default function useLogin() {
         onSubmit: (values) => {
             login(values)
                 .then((data: LoginResponse) => {
-                    handleToken(data)
+                    history.push("/todo")
                 })
                 .catch((error: any) => {
                     setGlobalSnackbar("SHOW", {
