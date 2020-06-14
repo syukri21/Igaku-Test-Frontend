@@ -43,5 +43,5 @@ export default function useTodo() {
         })
     }
 
-    return { handleDelete, todoDeleteState }
+    return { handleDelete, todoDeleteState, deleteIdsState }
 }

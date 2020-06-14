@@ -78,7 +78,7 @@ export interface TodoProps {}
 const Todo: React.SFC<TodoProps> = () => {
     const classes = useStyles()
     const history = useHistory()
-    const { handleDelete, todoDeleteState } = useTodo()
+    const { handleDelete, todoDeleteState, deleteIdsState } = useTodo()
     return (
         <>
             <div className={classes.appbar}>
@@ -119,7 +119,7 @@ const Todo: React.SFC<TodoProps> = () => {
                                 variant='contained'
                                 color='secondary'
                                 onClick={handleDelete}
-                                disabled={todoDeleteState.loading}
+                                disabled={!!(todoDeleteState.loading || (deleteIdsState.ids && deleteIdsState.ids?.length === 0))}
                                 startIcon={todoDeleteState.loading ? null : <DeleteIcon />}
                             >
                                 {todoDeleteState.loading ? "Loading..." : "Delete"}
