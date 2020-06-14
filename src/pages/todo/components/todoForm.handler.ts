@@ -10,7 +10,7 @@ const initialValues: TodoCreateParam = {
 }
 
 const validationSchema = Yup.object().shape({
-    task: Yup.string().min(6).required(),
+    task: Yup.string().required(),
 })
 
 export default function useTodoForm() {

@@ -22,11 +22,9 @@ export default function useLogin() {
 
     function handleToken(data: LoginResponse) {
         Api.setToken(data.accessToken)
-        if (Api.getToken()) {
+        setTimeout(() => {
             history.push("/todo")
-        } else {
-            handleToken(data)
-        }
+        }, 1000)
     }
 
     const formik = useFormik({
@@ -38,7 +36,6 @@ export default function useLogin() {
                     handleToken(data)
                 })
                 .catch((error: any) => {
-                    console.log("useLogin -> error", error)
                     setGlobalSnackbar("SHOW", {
                         message: "Email or Password wrong!",
                         severity: "error",
