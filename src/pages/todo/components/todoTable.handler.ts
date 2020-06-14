@@ -1,9 +1,14 @@
-import TodoGetAll from "../providers/todo-getAll.provider"
+import TodoGetAll, { getTodos } from "../providers/todo-getAll.provider"
 import TodoDeleteIds from "../providers/todo-delete-ids.provider"
+import { useState } from "reactn"
+import { todoEdit } from "../providers/todo-edit.provider"
+import { setGlobalSnackbar } from "../../../components/GlobalSnackbar/globalSnackbar.provider"
 
 export default function useTodoTable() {
     const [todosState] = TodoGetAll.useGlobal()
     const [deleteIds, setDeleteIds] = TodoDeleteIds.useGlobal()
+    const [editId, setEditId] = useState<number | null>()
+    const [editData, setEditData] = useState<any>()
 
     function handleCheck(id: number) {
         const ids = new Set(deleteIds.ids)
@@ -30,5 +35,36 @@ export default function useTodoTable() {
         }
     }
 
-    return { todosState, handleCheck, handleChangeCheck }
+    function handleChangeSwitch(event: any) {
+        setEditData({
+            ...editData,
+            status: event.target.checked,
+        })
+    }
+    function handleChangeTask(event: any) {
+        setEditData({
+            ...editData,
+            task: event.target.value,
+        })
+    }
+    function handleSubmitEdit() {
+        if (editId) {
+            todoEdit({
+                id: editId,
+                status: editData.status,
+                task: editData.task,
+            }).then(() => {
+                getTodos().then(() => {
+                    setGlobalSnackbar("SHOW", {
+                        message: `Success edit 1 item`,
+                        severity: "success",
+                    })
+                    setEditId(null)
+                    setEditData({})
+                })
+            })
+        }
+    }
+
+    return { todosState, handleCheck, handleChangeCheck, editId, setEditId, handleChangeSwitch, handleChangeTask, handleSubmitEdit }
 }
