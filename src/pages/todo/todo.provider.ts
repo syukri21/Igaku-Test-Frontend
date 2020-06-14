@@ -3,26 +3,26 @@ import { getTodos } from "./providers/todo-getAll.provider"
 import { setGlobalSnackbar } from "../../components/GlobalSnackbar/globalSnackbar.provider"
 import TodoDelete, { deleteTodo } from "./providers/todo-delete.provider"
 import TodoDeleteIds from "./providers/todo-delete-ids.provider"
+import UserActive, { getUser } from "./providers/user-active.provider"
 
 export default function useTodo() {
     const [deleteIdsState, setDeleteIds] = TodoDeleteIds.useGlobal()
     const [todoDeleteState] = TodoDelete.useGlobal()
+    const [userActiveState] = UserActive.useGlobal()
 
     useEffect(() => {
-        setTimeout(() => {
-            getTodos()
-                .then((data) => {
-                    console.log("useTodo -> data", data)
+        getTodos()
+            .then((data) => {
+                getUser()
+            })
+            .catch(() => {
+                setGlobalSnackbar("SHOW", {
+                    message: "Token Expired!",
+                    severity: "error",
                 })
-                .catch(() => {
-                    setGlobalSnackbar("SHOW", {
-                        message: "Token Expired!",
-                        severity: "error",
-                    })
-                    window.localStorage.clear()
-                    window.location.reload()
-                })
-        }, 1000)
+                window.localStorage.clear()
+                window.location.reload()
+            })
     }, [])
 
     function handleDelete() {
@@ -43,5 +43,5 @@ export default function useTodo() {
         })
     }
 
-    return { handleDelete, todoDeleteState, deleteIdsState }
+    return { handleDelete, todoDeleteState, deleteIdsState, user: userActiveState }
 }

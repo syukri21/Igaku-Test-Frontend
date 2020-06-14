@@ -78,7 +78,7 @@ export interface TodoProps {}
 const Todo: React.SFC<TodoProps> = () => {
     const classes = useStyles()
     const history = useHistory()
-    const { handleDelete, todoDeleteState, deleteIdsState } = useTodo()
+    const { handleDelete, todoDeleteState, deleteIdsState, user } = useTodo()
     return (
         <>
             <div className={classes.appbar}>
@@ -88,7 +88,7 @@ const Todo: React.SFC<TodoProps> = () => {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant='h6' className={classes.appbarTitle}>
-                            Todos App
+                            {user.data.firstName.charAt(0).toUpperCase() + user.data.firstName.substr(1)} Todo's
                         </Typography>
                         <Button
                             color='inherit'
