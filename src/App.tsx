@@ -19,15 +19,12 @@ function App() {
                     {routes.map((route: IRoute, key: number) => {
                         const Component = route.Component
                         const Loading = route.Loading
-                        const protect = route.Protected
                         const path = route.path
-                        const hasToken = !!Api.getToken()
                         return (
                             <Route
                                 key={key}
                                 path={path}
                                 render={(matchProps) => {
-                                    if (protect && !hasToken) return <Redirect to='/login'></Redirect>
                                     return (
                                         <React.Suspense fallback={Loading}>
                                             <Component {...matchProps} />
