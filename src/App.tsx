@@ -1,20 +1,19 @@
 import React from "react"
 import CssBaseline from "@material-ui/core/CssBaseline"
-import { Router, Switch } from "react-router-dom"
-import { createBrowserHistory } from "history"
+import { Switch } from "react-router-dom"
 import { IRoute } from "./routes"
 import routes from "./routes"
-import { Route, Redirect } from "react-router-dom"
+import { Route } from "react-router-dom"
 import GlobalSnackbar from "./components/GlobalSnackbar/GlobalSnackbar"
-import Api from "./api/api"
+import { HashRouter } from "react-router-dom"
 
-const browserHistory = createBrowserHistory()
+// const browserHistory = createBrowserHistory()
 
 function App() {
     return (
         <>
             <CssBaseline />
-            <Router history={browserHistory}>
+            <HashRouter>
                 <Switch>
                     {routes.map((route: IRoute, key: number) => {
                         const Component = route.Component
@@ -35,7 +34,7 @@ function App() {
                         )
                     })}
                 </Switch>
-            </Router>
+            </HashRouter>
             <GlobalSnackbar></GlobalSnackbar>
         </>
     )
