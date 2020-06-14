@@ -2,9 +2,9 @@
 FROM node:7.10 as build-deps
 WORKDIR /usr/src/app
 COPY package.json yarn.lock ./
-RUN npm install
+RUN yarn
 COPY . ./
-RUN npm run build
+RUN yarn build
 
 # Stage 2 - the production environment
 FROM nginx:1.12-alpine
