@@ -20,11 +20,6 @@ export default function useLogin() {
     const [loginState] = LoginProvider.useGlobal()
     const history = useHistory()
 
-    function handleToken(data: LoginResponse) {
-        Api.setToken(data.accessToken)
-        setTimeout(() => {}, 1000)
-    }
-
     const formik = useFormik({
         validationSchema,
         initialValues,

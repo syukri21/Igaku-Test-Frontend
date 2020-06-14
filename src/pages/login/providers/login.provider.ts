@@ -2,7 +2,15 @@ import { createProvider } from "reactn"
 import Api from "../../../api/api"
 import { LoginState, LoginParams } from "../@types/login.type"
 
-const LoginProvider = createProvider<LoginState>()
+const LoginProvider = createProvider<LoginState>({
+    loading: false,
+    error: null,
+    data: {
+        accessToken: "",
+        email: "",
+        expiresIn: "",
+    },
+})
 
 LoginProvider.addReducer("login", (global: any, _, type, payload) => {
     switch (type) {
